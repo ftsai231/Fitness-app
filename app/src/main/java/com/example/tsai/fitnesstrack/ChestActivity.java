@@ -17,6 +17,14 @@ public class ChestActivity extends AppCompatActivity{
     private Button CableCrossover;
     private Button InclineDumbbellPress;
     private Button MachineBenchPress;
+    private Button LowCableCrossover;
+    private Button LandmineChestPress;
+    private Button Pullover;
+    private Button SvendPress;
+    private Button PushUp;
+    private Button MedBallPushUp;
+    private Button Bufferfly;
+    private Button Dips;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,9 +79,69 @@ public class ChestActivity extends AppCompatActivity{
             }
         });
 
+        LowCableCrossover = findViewById(R.id.lowcablecrossover);
+        LowCableCrossover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayPopupWindow(v, R.layout.lowcabelcrossover);
+            }
+        });
 
+        LandmineChestPress = findViewById(R.id.landminechestpress);
+        LandmineChestPress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayPopupWindow(v, R.layout.landminechestpress);
+            }
+        });
 
+        Pullover = findViewById(R.id.pullover);
+        Pullover.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayPopupWindow(v, R.layout.straightarmdumbbellpullover);
+            }
+        });
 
+        SvendPress = findViewById(R.id.svendpress);
+        SvendPress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayPopupWindow(v, R.layout.svendpress);
+            }
+        });
+
+        PushUp = findViewById(R.id.pushup);
+        PushUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayPopupWindow(v, R.layout.pushup);
+            }
+        });
+
+        MedBallPushUp = findViewById(R.id.medballpushup);
+        MedBallPushUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayPopupWindow(v, R.layout.medballpushup );
+            }
+        });
+
+        Bufferfly = findViewById(R.id.bufferfly);
+        Bufferfly.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayPopupWindow(v, R.layout.bufferfly);
+            }
+        });
+
+        Dips = findViewById(R.id.dips);
+        Dips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                displayPopupWindow(v, R.layout.dips);
+            }
+        });
 
     }
 

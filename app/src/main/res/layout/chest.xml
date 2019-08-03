@@ -65,7 +65,77 @@
             android:background="@drawable/button_bg_stroke"
             android:text="Machine Bench Press" />
 
+        <Button
+            android:id="@+id/lowcablecrossover"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Low Cable Crossover" />
 
+        <Button
+            android:id="@+id/landminechestpress"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Landmine Chest Press" />
+
+        <Button
+            android:id="@+id/pullover"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Straight-Arm Dumbbell Pullover" />
+
+        <Button
+            android:id="@+id/svendpress"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Svend Press" />
+
+        <Button
+            android:id="@+id/pushup"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Push Up" />
+
+        <Button
+            android:id="@+id/medballpushup"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Medicine-Ball Push-Up" />
+
+        <Button
+            android:id="@+id/bufferfly"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Bufferfly" />
+
+        <Button
+            android:id="@+id/dips"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Dips" />
 
     </LinearLayout>
 </ScrollView>
