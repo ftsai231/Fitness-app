@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/barbenchpress"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Barbell Bench Press"
+            />
+
+        <Button
+            android:id="@+id/dumbbellbenchpress"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Dumbbell Bench Press" />
+
+        <Button
+            android:id="@+id/inclinedumbbellfly"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Incline Dumbbell fly" />
+
+        <Button
+            android:id="@+id/cabelcrossover"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Cable Crossover" />
+
+        <Button
+            android:id="@+id/inclinedumbbellpress"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Incline Dumbbell Press" />
+
+        <Button
+            android:id="@+id/machinebenchpress"
+            android:layout_width="fill_parent "
+            android:layout_height="50dp"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Machine Bench Press" />
+
+
+
+    </LinearLayout>
+</ScrollView>
