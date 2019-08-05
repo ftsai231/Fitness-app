@@ -9,15 +9,16 @@ import android.view.View;
 public class MainActivity extends AppCompatActivity {
 
 //    Button button;
-    Button button;
+    Button workoutDict;
+    Button workoutPlan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        button = (Button) findViewById(R.id.btn_mybutton);
-        button.setOnClickListener(new View.OnClickListener() {
+        workoutDict = (Button) findViewById(R.id.btn_mybutton);
+        workoutDict.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
@@ -26,6 +27,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        workoutPlan = findViewById(R.id.start);
+        workoutPlan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, WorkoutPlan_Activity.class);
+                startActivity(i);
+            }
+        });
 
     }
 
