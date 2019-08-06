@@ -1,26 +1,35 @@
 package com.example.tsai.fitnesstrack;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class WorkoutPlan_Activity extends AppCompatActivity {
 
-    DatabaseHelper myDb;
-    Button addSetBtn;
-    Button deleteSetBtn;
-    Button updateSetBtn;
-    EditText editSet;
-    EditText editWeight;
-    EditText editReps;
-    TextView tableSet;
-    TextView tableWeight;
-    TextView tableReps;
+    private DatabaseHelper myDb;
+    private Button addSetBtn;
+    private Button deleteSetBtn;
+    private Button updateSetBtn;
+    private EditText editSet;
+    private EditText editWeight;
+    private EditText editReps;
+    private TextView tableSet;
+    private TextView tableWeight;
+    private TextView tableReps;
+
+    private Context context = null;
+
+
+
 
 
     @Override
@@ -43,6 +52,34 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         updateData();
         deleteData();
 
+
+        /*************************************************************/
+
+        context = getApplicationContext();
+        final TableLayout tableLayout = (TableLayout)findViewById(R.id.table_layout_table);
+
+        Button addRowButton = (Button) findViewById(R.id.table_layout_add_row_button);
+        addRowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TableRow tableRow = new TableRow(context);
+                TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                tableRow.setLayoutParams(layoutParams);
+
+                Button btn = new Button(context);
+                btn.setText("New Row");
+                tableRow.addView(btn, 0);
+
+                CheckBox checkBox = new CheckBox(context);
+                checkBox.setText("Check it");
+                tableRow.addView(checkBox, 1);
+
+                tableLayout.addView(tableRow);
+
+
+
+            }
+        });
 
 
     }
