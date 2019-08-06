@@ -25,6 +25,8 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
     private TextView tableSet;
     private TextView tableWeight;
     private TextView tableReps;
+    private Button addRowButton;
+    private TableLayout tableLayout;
 
     private Context context = null;
 
@@ -56,9 +58,15 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         /*************************************************************/
 
         context = getApplicationContext();
-        final TableLayout tableLayout = (TableLayout)findViewById(R.id.table_layout_table);
+        tableLayout = (TableLayout)findViewById(R.id.table_layout_table);
 
-        Button addRowButton = (Button) findViewById(R.id.table_layout_add_row_button);
+        addRowButton = (Button) findViewById(R.id.table_layout_add_row_button);
+        addTableRow();
+
+
+    }
+
+    public void addTableRow(){
         addRowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,8 +88,6 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
 
             }
         });
-
-
     }
 
     public void addData(){
@@ -137,7 +143,7 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
     }
 
 
-    public String[] viewData(){
+    public void viewData(){
         Cursor res = myDb.getAllData();
         StringBuilder sb_set = new StringBuilder();
         StringBuilder sb_weight = new StringBuilder();
@@ -157,7 +163,6 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         tableSet.setText(strArr[0]);
         tableWeight.setText(strArr[1]);
         tableReps.setText(strArr[2]);
-        return strArr;
     }
 
 }
