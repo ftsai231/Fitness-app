@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME +" (SETT INTEGER PRIMARY KEY AUTOINCREMENT, WEIGHT TEXT , REPS TEXT);");
+        db.execSQL("CREATE TABLE " + TABLE_NAME +" (SETT INTEGER PRIMARY KEY, WEIGHT TEXT , REPS TEXT);");
     }
 
     @Override
@@ -42,6 +42,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return false;
         }
         else return true;
+    }
+
+    public Integer deleteData(String id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, "SETT = ?", new String[] {id});
+    }
+
+    public boolean updateData(String set, String weight, String reps){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Col_1, set);
+        contentValues.put(Col_2, weight);
+        contentValues.put(Col_3, reps);
+        db.update(TABLE_NAME, contentValues, "SETT = ?", new String[] {set});
+        return true;
     }
 
     public Cursor getAllData(){

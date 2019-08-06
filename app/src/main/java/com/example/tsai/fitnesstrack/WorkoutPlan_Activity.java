@@ -15,9 +15,12 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
     Button addSetBtn;
     Button deleteSetBtn;
     Button updateSetBtn;
+    EditText editSet;
     EditText editWeight;
     EditText editReps;
-    TextView workoutTable;
+    TextView tableSet;
+    TextView tableWeight;
+    TextView tableReps;
 
 
     @Override
@@ -26,14 +29,20 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         setContentView(R.layout.workoutplan);
         myDb = new DatabaseHelper(this);
 
+        editSet = (EditText) findViewById(R.id.set);
         editWeight = (EditText) findViewById(R.id.weight);
         editReps = (EditText) findViewById(R.id.reps);
         addSetBtn = (Button) findViewById(R.id.add);
         deleteSetBtn = (Button) findViewById(R.id.delete);
         updateSetBtn = (Button) findViewById(R.id.update);
-        workoutTable = (TextView) findViewById(R.id.table);
-
+        tableSet = (TextView) findViewById(R.id.table_Set);
+        tableWeight = (TextView) findViewById(R.id.table_weight);
+        tableReps = (TextView) findViewById(R.id.table_reps);
+        viewData();
         addData();
+        updateData();
+        deleteData();
+
 
 
     }
@@ -49,23 +58,69 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
                 else{
                     Toast.makeText(WorkoutPlan_Activity.this, "Set not Inserted", Toast.LENGTH_LONG).show();
                 }
-                String str = viewData();
-                workoutTable.setText(str);
+
+                viewData();
+
             }
         });
     }
 
-    public String viewData(){
-        Cursor res = myDb.getAllData();
-        StringBuilder sb = new StringBuilder();
-        while(res.moveToNext()){
-            sb.append("Set: " + res.getString(0)+"   ");
-            sb.append("Weight: " + res.getString(1) + "   ");
-            sb.append("Reps: " + res.getString(2) + "\n");
-        }
-        return sb.toString();
 
+
+    public void deleteData(){
+        deleteSetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Integer deletedRows = myDb.deleteData(editSet.getText().toString());
+                if(deletedRows > 0)
+                    Toast.makeText(WorkoutPlan_Activity.this,"Data Deleted",Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(WorkoutPlan_Activity.this,"Data not Deleted",Toast.LENGTH_LONG).show();
+                viewData();
+            }
+
+        });
     }
 
+    public void updateData(){
+        updateSetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isUpdate = myDb.updateData(editSet.getText().toString(),
+                                            editWeight.getText().toString(),
+                                            editReps.getText().toString());
+                if(isUpdate == true)
+                    Toast.makeText(WorkoutPlan_Activity.this,"Data Update",Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(WorkoutPlan_Activity.this,"Data not Updated",Toast.LENGTH_LONG).show();
+
+                viewData();
+            }
+        });
+    }
+
+
+    public String[] viewData(){
+        Cursor res = myDb.getAllData();
+        StringBuilder sb_set = new StringBuilder();
+        StringBuilder sb_weight = new StringBuilder();
+        StringBuilder sb_reps = new StringBuilder();
+        sb_set.append("Set \n");
+        sb_weight.append("Weight\n");
+        sb_reps.append("Reps\n");
+        while(res.moveToNext()){
+            sb_set.append(res.getString(0)+"\n");
+            sb_weight.append(res.getString(1) + "\n");
+            sb_reps.append(res.getString(2) + "\n");
+        }
+        String[] strArr = new String[3];
+        strArr[0] = sb_set.toString();
+        strArr[1] = sb_weight.toString();
+        strArr[2] = sb_reps.toString();
+        tableSet.setText(strArr[0]);
+        tableWeight.setText(strArr[1]);
+        tableReps.setText(strArr[2]);
+        return strArr;
+    }
 
 }
