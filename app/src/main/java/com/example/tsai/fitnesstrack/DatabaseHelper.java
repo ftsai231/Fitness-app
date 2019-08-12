@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME +" (SETT INTEGER PRIMARY KEY, WEIGHT TEXT , REPS TEXT);");
+        db.execSQL("CREATE TABLE " + TABLE_NAME +" (SETT INTEGER, WEIGHT TEXT , REPS TEXT);");
     }
 
     @Override
@@ -31,9 +31,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean insertData(String weight, String reps) {
+    public boolean insertData(String id, String weight, String reps) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put(Col_1, id);
         contentValues.put(Col_2, weight);
         contentValues.put(Col_3, reps);
         long result = db.insert(TABLE_NAME, null, contentValues);
@@ -46,6 +47,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Integer deleteData(String id){
         SQLiteDatabase db = this.getWritableDatabase();
+
+
         return db.delete(TABLE_NAME, "SETT = ?", new String[] {id});
     }
 

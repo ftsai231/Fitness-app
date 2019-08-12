@@ -27,11 +27,7 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
     private TextView tableReps;
     private Button addRowButton;
     private TableLayout tableLayout;
-
     private Context context = null;
-
-
-
 
 
     @Override
@@ -49,22 +45,100 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         tableSet = (TextView) findViewById(R.id.table_Set);
         tableWeight = (TextView) findViewById(R.id.table_weight);
         tableReps = (TextView) findViewById(R.id.table_reps);
-        viewData();
-        addData();
-        updateData();
-        deleteData();
-
-
-        /*************************************************************/
 
         context = getApplicationContext();
         tableLayout = (TableLayout)findViewById(R.id.table_layout_table);
-
         addRowButton = (Button) findViewById(R.id.table_layout_add_row_button);
+
+        viewDataTable();
+        addData();
+        updateData();
+        deleteData();
         addTableRow();
 
 
+
+
+
+
+
+
     }
+
+
+
+    public void addData(){
+        addSetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isInserted = myDb.insertData(editSet.getText().toString(), editWeight.getText().toString(), editReps.getText().toString());
+                if(isInserted){
+                    Toast.makeText(WorkoutPlan_Activity.this, "Set Inserted", Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(WorkoutPlan_Activity.this, "Set not Inserted", Toast.LENGTH_LONG).show();
+                }
+
+                /** add new row to the table **/
+
+                TableRow tableRow = new TableRow(context);
+                TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                tableRow.setLayoutParams(layoutParams);
+
+                TextView tV1 = new TextView(context);
+                tV1.setText(editSet.getText().toString());
+                tV1.setTextSize(20);
+
+                tableRow.addView(tV1, 0);
+
+                TextView tV2 = new TextView(context);
+                tV2.setText(editWeight.getText().toString());
+                tableRow.addView(tV2, 1);
+
+                TextView tV3 = new TextView(context);
+                tV3.setText(editReps.getText().toString());
+                tableRow.addView(tV3, 2);
+
+                tableLayout.addView(tableRow);
+
+            }
+        });
+    }
+
+
+
+    public void deleteData(){
+        deleteSetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Integer deletedRows = myDb.deleteData(editSet.getText().toString());
+                if(deletedRows > 0)
+                    Toast.makeText(WorkoutPlan_Activity.this,"Data Deleted",Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(WorkoutPlan_Activity.this,"Data not Deleted",Toast.LENGTH_LONG).show();
+
+                viewDataTable();
+            }
+
+        });
+    }
+
+    public void updateData(){
+        updateSetBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isUpdate = myDb.updateData(editSet.getText().toString(),
+                                            editWeight.getText().toString(),
+                                            editReps.getText().toString());
+                if(isUpdate == true)
+                    Toast.makeText(WorkoutPlan_Activity.this,"Data Update",Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(WorkoutPlan_Activity.this,"Data not Updated",Toast.LENGTH_LONG).show();
+
+            }
+        });
+    }
+
 
     public void addTableRow(){
         addRowButton.setOnClickListener(new View.OnClickListener() {
@@ -83,86 +157,37 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
                 tableRow.addView(checkBox, 1);
 
                 tableLayout.addView(tableRow);
-
-
-
             }
         });
     }
 
-    public void addData(){
-        addSetBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isInserted = myDb.insertData(editWeight.getText().toString(), editReps.getText().toString());
-                if(isInserted){
-                    Toast.makeText(WorkoutPlan_Activity.this, "Set Inserted", Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Toast.makeText(WorkoutPlan_Activity.this, "Set not Inserted", Toast.LENGTH_LONG).show();
-                }
-
-                viewData();
-
-            }
-        });
-    }
-
-
-
-    public void deleteData(){
-        deleteSetBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Integer deletedRows = myDb.deleteData(editSet.getText().toString());
-                if(deletedRows > 0)
-                    Toast.makeText(WorkoutPlan_Activity.this,"Data Deleted",Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(WorkoutPlan_Activity.this,"Data not Deleted",Toast.LENGTH_LONG).show();
-                viewData();
-            }
-
-        });
-    }
-
-    public void updateData(){
-        updateSetBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                boolean isUpdate = myDb.updateData(editSet.getText().toString(),
-                                            editWeight.getText().toString(),
-                                            editReps.getText().toString());
-                if(isUpdate == true)
-                    Toast.makeText(WorkoutPlan_Activity.this,"Data Update",Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(WorkoutPlan_Activity.this,"Data not Updated",Toast.LENGTH_LONG).show();
-
-                viewData();
-            }
-        });
-    }
-
-
-    public void viewData(){
+    public void viewDataTable(){
         Cursor res = myDb.getAllData();
-        StringBuilder sb_set = new StringBuilder();
-        StringBuilder sb_weight = new StringBuilder();
-        StringBuilder sb_reps = new StringBuilder();
-        sb_set.append("Set \n");
-        sb_weight.append("Weight\n");
-        sb_reps.append("Reps\n");
+
         while(res.moveToNext()){
-            sb_set.append(res.getString(0)+"\n");
-            sb_weight.append(res.getString(1) + "\n");
-            sb_reps.append(res.getString(2) + "\n");
+
+            TableRow tableRow = new TableRow(context);
+            TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+            tableRow.setLayoutParams(layoutParams);
+
+            TextView tV1 = new TextView(context);
+            tV1.setText(res.getString(0));
+            tV1.setTextSize(20);
+
+            tableRow.addView(tV1, 0);
+
+            TextView tV2 = new TextView(context);
+            tV2.setText(res.getString(1));
+            tableRow.addView(tV2, 1);
+
+            TextView tV3 = new TextView(context);
+            tV3.setText(res.getString(2));
+            tableRow.addView(tV3, 2);
+
+            tableLayout.addView(tableRow);
+
         }
-        String[] strArr = new String[3];
-        strArr[0] = sb_set.toString();
-        strArr[1] = sb_weight.toString();
-        strArr[2] = sb_reps.toString();
-        tableSet.setText(strArr[0]);
-        tableWeight.setText(strArr[1]);
-        tableReps.setText(strArr[2]);
+
     }
 
 }
