@@ -5,49 +5,67 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
+
+
     <LinearLayout
+        android:id="@+id/tableLayoutZone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TableLayout
+            android:id="@+id/table_layout_table"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            >
 
-            <Button
-                android:id="@+id/add"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Add Set" />
+            <View
+                android:layout_height="5dp"
+                android:background="@color/colorPrimary" />
 
-            <Button
-                android:id="@+id/update"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Update Set" />
+            <!-- android:layout_column is used specify table row column, column index start from 0.-->
+            <TableRow
+                android:id="@+id/table_layout_row_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
-            <Button
-                android:id="@+id/delete"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Delete Set" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#000000"
+                    android:text="Set"
+                    android:textSize="25dp" />
 
-            <Button
-                android:id="@+id/deleteAll"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Delete All" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#000000"
+                    android:text="Weight(lbs)"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="#000000"
+                    android:text="Reps"
+                    android:textSize="25dp" />
 
 
-        </LinearLayout>
+                <!--<Button-->
+                <!--android:id="@+id/table_layout_add_row_button"-->
+                <!--android:text="Add Set" />-->
+
+                <!--<Button-->
+                <!--android:id="@+id/table_layout_delete_row_button"-->
+                <!--android:text="Delete Set" />-->
+            </TableRow>
+        </TableLayout>
 
         <LinearLayout
+            android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -85,94 +103,50 @@
 
         </LinearLayout>
 
+
         <LinearLayout
+            android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/table_Set"
+            <Button
+                android:id="@+id/add"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textColor="#000000"
-                android:textSize="20dp" />
+                android:text="Add Set" />
 
-            <TextView
-                android:id="@+id/table_weight"
+            <Button
+                android:id="@+id/update"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textColor="#000000"
-                android:textSize="20dp" />
+                android:text="Update Set" />
 
-            <TextView
-                android:id="@+id/table_reps"
+            <Button
+                android:id="@+id/delete"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:textColor="#000000"
-                android:textSize="20dp" />
+                android:text="Delete Set" />
+
+            <Button
+                android:id="@+id/deleteAll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="Delete All" />
 
 
         </LinearLayout>
 
 
-        <TableLayout
-            android:id="@+id/table_layout_table"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <!-- A button span first 2 columns. -->
-            <!--<TableRow-->
-                <!--android:id="@+id/table_layout_row_1"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--&lt;!&ndash; android:layout_span configure how many columns to span by this column. &ndash;&gt;-->
-                <!--<Button-->
-                    <!--android:layout_gravity="left"-->
-                    <!--android:layout_span="2"-->
-                    <!--android:text="This column span first two column" />-->
-
-            <!--</TableRow>-->
-
-            <!--&lt;!&ndash; Add three common column in the table row. &ndash;&gt;-->
-            <!--<TableRow-->
-                <!--android:id="@+id/table_layout_row_2"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content">-->
-
-                <!--<TextView android:text="User Name:" />-->
-
-                <!--<EditText android:hint="Input user name" />-->
-
-                <!--<Button android:text="Submit" />-->
-
-            <!--</TableRow>-->
-
-            <!-- Add a blue line. -->
-            <View
-                android:layout_height="5dp"
-                android:background="@color/colorPrimary" />
-
-            <!-- android:layout_column is used specify table row column, column index start from 0.-->
-            <TableRow
-                android:id="@+id/table_layout_row_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <Button
-                    android:id="@+id/table_layout_add_row_button"
-                    android:text="Add Row" />
-
-                <Button
-                    android:id="@+id/table_layout_delete_row_button"
-                    android:text="Delete Row" />
-            </TableRow>
 
 
-        </TableLayout>
+
+
+
 
 
     </LinearLayout>

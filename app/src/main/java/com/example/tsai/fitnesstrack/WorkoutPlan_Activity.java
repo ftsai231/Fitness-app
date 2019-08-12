@@ -2,11 +2,11 @@ package com.example.tsai.fitnesstrack;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -22,10 +22,8 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
     private EditText editSet;
     private EditText editWeight;
     private EditText editReps;
-    private TextView tableSet;
-    private TextView tableWeight;
-    private TextView tableReps;
-    private Button addRowButton;
+
+//    private Button addRowButton;
     private TableLayout tableLayout;
     private Context context = null;
 
@@ -42,30 +40,21 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         addSetBtn = (Button) findViewById(R.id.add);
         deleteSetBtn = (Button) findViewById(R.id.delete);
         updateSetBtn = (Button) findViewById(R.id.update);
-        tableSet = (TextView) findViewById(R.id.table_Set);
-        tableWeight = (TextView) findViewById(R.id.table_weight);
-        tableReps = (TextView) findViewById(R.id.table_reps);
+//        tableSet = (TextView) findViewById(R.id.table_Set);
+//        tableWeight = (TextView) findViewById(R.id.table_weight);
+//        tableReps = (TextView) findViewById(R.id.table_reps);
 
         context = getApplicationContext();
         tableLayout = (TableLayout)findViewById(R.id.table_layout_table);
-        addRowButton = (Button) findViewById(R.id.table_layout_add_row_button);
+//        addRowButton = (Button) findViewById(R.id.table_layout_add_row_button);
 
         viewDataTable();
         addData();
         updateData();
         deleteData();
-        addTableRow();
-
-
-
-
-
-
-
+//        addTableRow();
 
     }
-
-
 
     public void addData(){
         addSetBtn.setOnClickListener(new View.OnClickListener() {
@@ -85,18 +74,29 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
                 TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
                 tableRow.setLayoutParams(layoutParams);
 
+                TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f);
+
                 TextView tV1 = new TextView(context);
+                tV1.setLayoutParams(params);
                 tV1.setText(editSet.getText().toString());
+                tV1.setTextColor(Color.BLACK);
                 tV1.setTextSize(20);
 
                 tableRow.addView(tV1, 0);
 
                 TextView tV2 = new TextView(context);
+                tV2.setLayoutParams(params);
                 tV2.setText(editWeight.getText().toString());
+                tV2.setTextColor(Color.BLACK);
+                tV2.setTextSize(20);
+
                 tableRow.addView(tV2, 1);
 
                 TextView tV3 = new TextView(context);
+                tV2.setLayoutParams(params);
                 tV3.setText(editReps.getText().toString());
+                tV3.setTextColor(Color.BLACK);
+                tV3.setTextSize(20);
                 tableRow.addView(tV3, 2);
 
                 tableLayout.addView(tableRow);
@@ -140,26 +140,26 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
     }
 
 
-    public void addTableRow(){
-        addRowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TableRow tableRow = new TableRow(context);
-                TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-                tableRow.setLayoutParams(layoutParams);
-
-                Button btn = new Button(context);
-                btn.setText("New Row");
-                tableRow.addView(btn, 0);
-
-                CheckBox checkBox = new CheckBox(context);
-                checkBox.setText("Check it");
-                tableRow.addView(checkBox, 1);
-
-                tableLayout.addView(tableRow);
-            }
-        });
-    }
+//    public void addTableRow(){
+//        addRowButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                TableRow tableRow = new TableRow(context);
+//                TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+//                tableRow.setLayoutParams(layoutParams);
+//
+//                Button btn = new Button(context);
+//                btn.setText("New Row");
+//                tableRow.addView(btn, 0);
+//
+//                CheckBox checkBox = new CheckBox(context);
+//                checkBox.setText("Check it");
+//                tableRow.addView(checkBox, 1);
+//
+//                tableLayout.addView(tableRow);
+//            }
+//        });
+//    }
 
     public void viewDataTable(){
         Cursor res = myDb.getAllData();
@@ -170,18 +170,29 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
             TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
             tableRow.setLayoutParams(layoutParams);
 
+            TableRow.LayoutParams params = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f);
+
             TextView tV1 = new TextView(context);
+            tV1.setLayoutParams(params);
             tV1.setText(res.getString(0));
+            tV1.setTextColor(Color.BLACK);
             tV1.setTextSize(20);
 
             tableRow.addView(tV1, 0);
 
             TextView tV2 = new TextView(context);
+            tV2.setLayoutParams(params);
             tV2.setText(res.getString(1));
+            tV2.setTextColor(Color.BLACK);
+            tV2.setTextSize(20);
+
             tableRow.addView(tV2, 1);
 
             TextView tV3 = new TextView(context);
+            tV2.setLayoutParams(params);
             tV3.setText(res.getString(2));
+            tV3.setTextColor(Color.BLACK);
+            tV3.setTextSize(20);
             tableRow.addView(tV3, 2);
 
             tableLayout.addView(tableRow);
