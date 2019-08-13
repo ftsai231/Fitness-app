@@ -19,6 +19,7 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
     private Button addSetBtn;
     private Button deleteSetBtn;
     private Button updateSetBtn;
+    private Button deleteAllBtn;
     private EditText editSet;
     private EditText editWeight;
     private EditText editReps;
@@ -32,6 +33,7 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.workoutplan);
+
         myDb = new DatabaseHelper(this);
 
         editSet = (EditText) findViewById(R.id.set);
@@ -40,9 +42,7 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         addSetBtn = (Button) findViewById(R.id.add);
         deleteSetBtn = (Button) findViewById(R.id.delete);
         updateSetBtn = (Button) findViewById(R.id.update);
-//        tableSet = (TextView) findViewById(R.id.table_Set);
-//        tableWeight = (TextView) findViewById(R.id.table_weight);
-//        tableReps = (TextView) findViewById(R.id.table_reps);
+        deleteAllBtn = (Button) findViewById(R.id.deleteAll);
 
         context = getApplicationContext();
         tableLayout = (TableLayout)findViewById(R.id.table_layout_table);
@@ -52,8 +52,13 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         addData();
         updateData();
         deleteData();
-//        addTableRow();
+        deleteAllData();
+    }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        myDb = new DatabaseHelper(this);
     }
 
     public void addData(){
@@ -101,6 +106,7 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
 
                 tableLayout.addView(tableRow);
 
+
             }
         });
     }
@@ -123,6 +129,16 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         });
     }
 
+    public void deleteAllData(){
+        deleteAllBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myDb.deleteTable();
+                while (tableLayout.getChildCount() > 2) tableLayout.removeView(tableLayout.getChildAt(tableLayout.getChildCount() - 1));
+            }
+        });
+    }
+
     public void updateData(){
         updateSetBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +150,8 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
                     Toast.makeText(WorkoutPlan_Activity.this,"Data Update",Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(WorkoutPlan_Activity.this,"Data not Updated",Toast.LENGTH_LONG).show();
+
+                
 
             }
         });

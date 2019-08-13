@@ -17,10 +17,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".StartActivity"></activity>
-        <activity android:name=".ChestActivity"></activity>
+        <!--<activity android:name=".StartActivity"></activity>-->
+        <!--<activity android:name=".ChestActivity"></activity>-->
         <activity android:name=".WorkoutPlan_Activity"></activity>
-        <!--<activity android:name=".ChestWorkout.BenchPress"></activity>-->
 
 
     </application>

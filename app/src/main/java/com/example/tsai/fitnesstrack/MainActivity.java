@@ -17,15 +17,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        workoutDict = (Button) findViewById(R.id.btn_mybutton);
-        workoutDict.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO Auto-generated method stub
-                Intent i = new Intent(MainActivity.this, StartActivity.class);
-                startActivity(i);
-            }
-        });
+//        workoutDict = (Button) findViewById(R.id.btn_mybutton);
+//        workoutDict.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // TODO Auto-generated method stub
+//                Intent i = new Intent(MainActivity.this, StartActivity.class);
+//                startActivity(i);
+//            }
+//        });
 
         workoutPlan = findViewById(R.id.start);
         workoutPlan.setOnClickListener(new View.OnClickListener() {
