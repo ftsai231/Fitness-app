@@ -106,8 +106,6 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         editWeight6 = (EditText) findViewById(R.id.weight6);
         editReps6 = (EditText) findViewById(R.id.reps6);
 
-
-
         deleteAllBtn = (Button) findViewById(R.id.deleteAll);
 
         addSetBtn1 = (Button) findViewById(R.id.add);
@@ -143,14 +141,23 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         viewDataTable(exercise4, tableLayout4);
         viewDataTable(exercise5, tableLayout5);
         viewDataTable(exercise6, tableLayout6);
+
         addData(addSetBtn1, exercise1, tableLayout1, editSet1, editWeight1, editReps1);
         addData(addSetBtn2, exercise2, tableLayout2, editSet2, editWeight2, editReps2);
         addData(addSetBtn3, exercise3, tableLayout3, editSet3, editWeight3, editReps3);
         addData(addSetBtn4, exercise4, tableLayout4, editSet4, editWeight4, editReps4);
         addData(addSetBtn5, exercise5, tableLayout5, editSet5, editWeight5, editReps5);
         addData(addSetBtn6, exercise6, tableLayout6, editSet6, editWeight6, editReps6);
+
         updateData();
-        deleteData(deleteSetBtn1, exercise1);
+
+        deleteData(deleteSetBtn1, exercise1, tableLayout1, editSet1);
+        deleteData(deleteSetBtn2, exercise2, tableLayout2, editSet2);
+        deleteData(deleteSetBtn3, exercise3, tableLayout3, editSet3);
+        deleteData(deleteSetBtn4, exercise4, tableLayout4, editSet4);
+        deleteData(deleteSetBtn5, exercise5, tableLayout5, editSet5);
+        deleteData(deleteSetBtn6, exercise6, tableLayout6, editSet6);
+
         deleteAllData();
     }
 
@@ -205,14 +212,13 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
 
                 table.addView(tableRow);
 
-
             }
         });
     }
 
 
 
-    public void deleteData(Button btn, final String exercise){
+    public void deleteData(Button btn, final String exercise, final TableLayout table, final EditText editSet){
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,6 +227,22 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
                     Toast.makeText(WorkoutPlan_Activity.this,"Data Deleted",Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(WorkoutPlan_Activity.this,"Data not Deleted",Toast.LENGTH_LONG).show();
+
+//                int count = table.getChildCount();
+//                for(int i=0;i<count;i++){
+//                    TableRow row = (TableRow) table.getChildAt(i);
+//
+//                    TextView t = (TextView) row.getChildAt(0);
+//                    if(t.toString().equals(editSet.getText().toString())){
+//                        table.removeViewAt(i);
+//                        break;
+//                    }
+//                }
+
+                while (tableLayout1.getChildCount() > 2) {
+                    tableLayout1.removeView(tableLayout1.getChildAt(tableLayout1.getChildCount() - 1));
+                }
+                viewDataTable(exercise, table);
 
             }
 
