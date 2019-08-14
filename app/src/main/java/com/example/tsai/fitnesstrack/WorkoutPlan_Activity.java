@@ -40,16 +40,41 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
 
     private DatabaseHelper myDb;
     private Button deleteAllBtn;
-    private EditText editSet;
-    private EditText editWeight;
-    private EditText editReps;
+    private Context context = null;
+
+    private EditText editSet1;
+    private EditText editWeight1;
+    private EditText editReps1;
+    private EditText editSet2;
+    private EditText editWeight2;
+    private EditText editReps2;
+    private EditText editSet3;
+    private EditText editWeight3;
+    private EditText editReps3;
+    private EditText editSet4;
+    private EditText editWeight4;
+    private EditText editReps4;
+    private EditText editSet5;
+    private EditText editWeight5;
+    private EditText editReps5;
+    private EditText editSet6;
+    private EditText editWeight6;
+    private EditText editReps6;
+
     private TableLayout tableLayout1;
     private TableLayout tableLayout2;
     private TableLayout tableLayout3;
     private TableLayout tableLayout4;
     private TableLayout tableLayout5;
     private TableLayout tableLayout6;
-    private Context context = null;
+
+
+    private final String exercise1 = "barbell bench press";
+    private final String exercise2 = "dumbbell bench press";
+    private final String exercise3 = "incline barbell bench press";
+    private final String exercise4 = "dips for chest";
+    private final String exercise5 = "bench cable fly";
+    private final String exercise6 = "incline dumbbell flies";
 
     private SimpleDateFormat date;
 
@@ -62,9 +87,27 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
         context = getApplicationContext();
 
-        editSet = (EditText) findViewById(R.id.set);
-        editWeight = (EditText) findViewById(R.id.weight);
-        editReps = (EditText) findViewById(R.id.reps);
+        editSet1 = (EditText) findViewById(R.id.set);
+        editWeight1 = (EditText) findViewById(R.id.weight);
+        editReps1 = (EditText) findViewById(R.id.reps);
+        editSet2 = (EditText) findViewById(R.id.set2);
+        editWeight2 = (EditText) findViewById(R.id.weight2);
+        editReps2 = (EditText) findViewById(R.id.reps2);
+        editSet3 = (EditText) findViewById(R.id.set3);
+        editWeight3 = (EditText) findViewById(R.id.weight3);
+        editReps3 = (EditText) findViewById(R.id.reps3);
+        editSet4 = (EditText) findViewById(R.id.set4);
+        editWeight4 = (EditText) findViewById(R.id.weight4);
+        editReps4 = (EditText) findViewById(R.id.reps4);
+        editSet5 = (EditText) findViewById(R.id.set5);
+        editWeight5 = (EditText) findViewById(R.id.weight5);
+        editReps5 = (EditText) findViewById(R.id.reps5);
+        editSet6 = (EditText) findViewById(R.id.set6);
+        editWeight6 = (EditText) findViewById(R.id.weight6);
+        editReps6 = (EditText) findViewById(R.id.reps6);
+
+
+
         deleteAllBtn = (Button) findViewById(R.id.deleteAll);
 
         addSetBtn1 = (Button) findViewById(R.id.add);
@@ -83,7 +126,7 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         deleteSetBtn5 = (Button) findViewById(R.id.delete5);
         updateSetBtn5 = (Button) findViewById(R.id.update5);
         addSetBtn6 = (Button) findViewById(R.id.add6);
-        deleteSetBtn6 = (Button) findViewById(R.id.delete5);
+        deleteSetBtn6 = (Button) findViewById(R.id.delete6);
         updateSetBtn6 = (Button) findViewById(R.id.update6);
 
         tableLayout1 = (TableLayout)findViewById(R.id.table_layout_table);
@@ -94,11 +137,20 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         tableLayout6 = (TableLayout)findViewById(R.id.table_layout_table6);
 //        addRowButton = (Button) findViewById(R.id.table_layout_add_row_button);
 
-        viewDataTable();
-        addData(addSetBtn1, "barbell bench press", tableLayout1);
-        addData(addSetBtn2, "dumbbell bench press", tableLayout2);
+        viewDataTable(exercise1, tableLayout1);
+        viewDataTable(exercise2, tableLayout2);
+        viewDataTable(exercise3, tableLayout3);
+        viewDataTable(exercise4, tableLayout4);
+        viewDataTable(exercise5, tableLayout5);
+        viewDataTable(exercise6, tableLayout6);
+        addData(addSetBtn1, exercise1, tableLayout1, editSet1, editWeight1, editReps1);
+        addData(addSetBtn2, exercise2, tableLayout2, editSet2, editWeight2, editReps2);
+        addData(addSetBtn3, exercise3, tableLayout3, editSet3, editWeight3, editReps3);
+        addData(addSetBtn4, exercise4, tableLayout4, editSet4, editWeight4, editReps4);
+        addData(addSetBtn5, exercise5, tableLayout5, editSet5, editWeight5, editReps5);
+        addData(addSetBtn6, exercise6, tableLayout6, editSet6, editWeight6, editReps6);
         updateData();
-        deleteData();
+        deleteData(deleteSetBtn1, exercise1);
         deleteAllData();
     }
 
@@ -108,7 +160,7 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         myDb = new DatabaseHelper(this);
     }
 
-    public void addData(Button btn, final String exercise, final TableLayout table){
+    public void addData(Button btn, final String exercise, final TableLayout table, final EditText editSet, final EditText editWeight, final EditText editReps){
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,17 +212,16 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
 
 
 
-    public void deleteData(){
-        deleteSetBtn1.setOnClickListener(new View.OnClickListener() {
+    public void deleteData(Button btn, final String exercise){
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Integer deletedRows = myDb.deleteData(editSet.getText().toString());
+                Integer deletedRows = myDb.deleteData(editSet1.getText().toString(), exercise);
                 if(deletedRows > 0)
                     Toast.makeText(WorkoutPlan_Activity.this,"Data Deleted",Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(WorkoutPlan_Activity.this,"Data not Deleted",Toast.LENGTH_LONG).show();
 
-                viewDataTable();
             }
 
         });
@@ -190,9 +241,9 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         updateSetBtn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isUpdate = myDb.updateData(editSet.getText().toString(),
-                                            editWeight.getText().toString(),
-                                            editReps.getText().toString());
+                boolean isUpdate = myDb.updateData(editSet1.getText().toString(),
+                                            editWeight1.getText().toString(),
+                                            editReps1.getText().toString());
                 if(isUpdate == true)
                     Toast.makeText(WorkoutPlan_Activity.this,"Data Update",Toast.LENGTH_LONG).show();
                 else
@@ -226,8 +277,8 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
 //        });
 //    }
 
-    public void viewDataTable(){
-        Cursor res = myDb.getAllData();
+    public void viewDataTable(String exercise, TableLayout table){
+        Cursor res = myDb.getAllData(exercise);
 
         while(res.moveToNext()){
 
@@ -260,7 +311,7 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
             tV3.setTextSize(20);
             tableRow.addView(tV3, 2);
 
-            tableLayout1.addView(tableRow);
+            table.addView(tableRow);
 
         }
 

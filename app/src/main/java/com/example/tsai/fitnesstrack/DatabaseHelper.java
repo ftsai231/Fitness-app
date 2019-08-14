@@ -70,11 +70,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         else return true;
     }
 
-    public Integer deleteData(String id){
+    public Integer deleteData(String id, String exercise){
         SQLiteDatabase db = this.getWritableDatabase();
 
 
-        return db.delete(TABLE_NAME, "SETT = ?", new String[] {id});
+        return db.delete(TABLE_NAME, "SETT = ?" + " AND " + "EXERCISE = ?", new String[] {id, exercise});
     }
 
     public boolean updateData(String set, String weight, String reps){
@@ -87,9 +87,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return true;
     }
 
-    public Cursor getAllData(){
+    public Cursor getAllData(String exercise){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor res = db.rawQuery("select * from " + TABLE_NAME, null);
+        Cursor res = db.rawQuery("select * from " + TABLE_NAME + " WHERE EXERCISE = " + "'" + exercise + "'" + ";", null);
         return res;
     }
 
