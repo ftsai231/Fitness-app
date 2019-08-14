@@ -149,8 +149,6 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         addData(addSetBtn5, exercise5, tableLayout5, editSet5, editWeight5, editReps5);
         addData(addSetBtn6, exercise6, tableLayout6, editSet6, editWeight6, editReps6);
 
-        updateData();
-
         deleteData(deleteSetBtn1, exercise1, tableLayout1, editSet1);
         deleteData(deleteSetBtn2, exercise2, tableLayout2, editSet2);
         deleteData(deleteSetBtn3, exercise3, tableLayout3, editSet3);
@@ -158,7 +156,14 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         deleteData(deleteSetBtn5, exercise5, tableLayout5, editSet5);
         deleteData(deleteSetBtn6, exercise6, tableLayout6, editSet6);
 
-        deleteAllData();
+        updateData(updateSetBtn1, exercise1, tableLayout1, editSet1, editWeight1, editReps1);
+        updateData(updateSetBtn2, exercise2, tableLayout2, editSet2, editWeight2, editReps2);
+        updateData(updateSetBtn3, exercise3, tableLayout3, editSet3, editWeight3, editReps3);
+        updateData(updateSetBtn4, exercise4, tableLayout4, editSet4, editWeight4, editReps4);
+        updateData(updateSetBtn5, exercise5, tableLayout5, editSet5, editWeight5, editReps5);
+        updateData(updateSetBtn6, exercise6, tableLayout6, editSet6, editWeight6, editReps6);
+
+//        deleteAllData();
     }
 
     @Override
@@ -222,14 +227,19 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Integer deletedRows = myDb.deleteData(editSet1.getText().toString(), exercise);
+                Integer deletedRows = myDb.deleteData(editSet.getText().toString(), exercise);
                 if(deletedRows > 0)
                     Toast.makeText(WorkoutPlan_Activity.this,"Data Deleted",Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(WorkoutPlan_Activity.this,"Data not Deleted",Toast.LENGTH_LONG).show();
 
+                while (table.getChildCount() > 3) {
+                    table.removeView(table.getChildAt(table.getChildCount() - 1));
+                }
+                viewDataTable(exercise, table);
+
 //                int count = table.getChildCount();
-//                for(int i=0;i<count;i++){
+//                for(int i=2;i<count;i++){
 //                    TableRow row = (TableRow) table.getChildAt(i);
 //
 //                    TextView t = (TextView) row.getChildAt(0);
@@ -239,38 +249,40 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
 //                    }
 //                }
 
-                while (tableLayout1.getChildCount() > 2) {
-                    tableLayout1.removeView(tableLayout1.getChildAt(tableLayout1.getChildCount() - 1));
-                }
-                viewDataTable(exercise, table);
-
             }
 
         });
     }
 
-    public void deleteAllData(){
+    public void deleteAllData(final TableLayout table){
         deleteAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 myDb.deleteTable();
-                while (tableLayout1.getChildCount() > 2) tableLayout1.removeView(tableLayout1.getChildAt(tableLayout1.getChildCount() - 1));
+                while (table.getChildCount() > 3) tableLayout1.removeView(tableLayout1.getChildAt(tableLayout1.getChildCount() - 1));
             }
         });
     }
 
-    public void updateData(){
-        updateSetBtn1.setOnClickListener(new View.OnClickListener() {
+    public void updateData(Button updateBtn, final String exercise, final TableLayout table,
+                           final EditText editSet, final EditText editWeight, final EditText editReps){
+        updateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean isUpdate = myDb.updateData(editSet1.getText().toString(),
-                                            editWeight1.getText().toString(),
-                                            editReps1.getText().toString());
+                boolean isUpdate = myDb.updateData(editSet.getText().toString(),
+                                            editWeight.getText().toString(),
+                                            editReps.getText().toString(),
+                                            exercise,
+                                            date);
                 if(isUpdate == true)
                     Toast.makeText(WorkoutPlan_Activity.this,"Data Update",Toast.LENGTH_LONG).show();
                 else
                     Toast.makeText(WorkoutPlan_Activity.this,"Data not Updated",Toast.LENGTH_LONG).show();
 
+                while (table.getChildCount() > 3) {
+                    table.removeView(table.getChildAt(table.getChildCount() - 1));
+                }
+                viewDataTable(exercise, table);
 
 
             }

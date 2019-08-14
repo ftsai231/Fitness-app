@@ -77,12 +77,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.delete(TABLE_NAME, "SETT = ?" + " AND " + "EXERCISE = ?", new String[] {id, exercise});
     }
 
-    public boolean updateData(String set, String weight, String reps){
+    public boolean updateData(String set, String weight, String reps, String exercise, SimpleDateFormat date){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Col_1, set);
         contentValues.put(Col_2, weight);
         contentValues.put(Col_3, reps);
+        contentValues.put(Col_4, exercise);
+        contentValues.put(Col_5, String.valueOf(date));
+
         db.update(TABLE_NAME, contentValues, "SETT = ?", new String[] {set});
         return true;
     }
