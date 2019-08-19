@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
 //    Button button;
     Button workoutDict;
     Button workoutPlan;
+    Button history;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        history = findViewById(R.id.history);
+        history.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this, History.class);
+                startActivity(i);
+            }
+        });
     }
 
 
