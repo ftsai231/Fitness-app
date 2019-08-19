@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
+
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -19,36 +20,65 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_gravity="center_horizontal"
-            android:text="Start Workout!"
+            android:text="Workout Plan"
             android:textSize="30dp" />
 
         <Button
-            android:id="@+id/btn_mybutton"
+            android:id="@+id/btn_chest"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="122dp"
             android:background="@drawable/button_bg_stroke"
-            android:text="Workout Dictionary" />
+            android:text="Chest" />
 
         <Button
-            android:id="@+id/start"
+            android:id="@+id/btn_back"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
             android:background="@drawable/button_bg_stroke"
-            android:text="Start Workout" />
-
+            android:text="Back" />
 
         <Button
-            android:id="@+id/history"
+            android:id="@+id/btn_arms"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/button_bg_stroke"
+            android:text="Arms" />
+
+        <Button
+            android:id="@+id/btn_shoulder"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="History" />
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Shoulder" />
+
+        <Button
+            android:id="@+id/btn_legs"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/button_bg_stroke"
+            android:text="Legs" />
+
+
 
 
     </LinearLayout>

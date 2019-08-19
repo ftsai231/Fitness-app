@@ -14,9 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
 
-public class WorkoutPlan_Activity extends AppCompatActivity {
+public class ChestPlan extends AppCompatActivity {
 
 
     private Button addSetBtn1;
@@ -81,7 +80,7 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.workoutplan);
+        setContentView(R.layout.chest_recommand);
 
         myDb = new DatabaseHelper(this);
         SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
@@ -178,10 +177,10 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean isInserted = myDb.insertData(editSet.getText().toString(), editWeight.getText().toString(), editReps.getText().toString(), exercise, date);
                 if(isInserted){
-                    Toast.makeText(WorkoutPlan_Activity.this, "Set Inserted", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChestPlan.this, "Set Inserted", Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(WorkoutPlan_Activity.this, "Set not Inserted", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChestPlan.this, "Set not Inserted", Toast.LENGTH_LONG).show();
                 }
 
                 /** add new row to the table **/
@@ -229,9 +228,9 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Integer deletedRows = myDb.deleteData(editSet.getText().toString(), exercise);
                 if(deletedRows > 0)
-                    Toast.makeText(WorkoutPlan_Activity.this,"Data Deleted",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChestPlan.this,"Data Deleted",Toast.LENGTH_LONG).show();
                 else
-                    Toast.makeText(WorkoutPlan_Activity.this,"Data not Deleted",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChestPlan.this,"Data not Deleted",Toast.LENGTH_LONG).show();
 
                 while (table.getChildCount() > 3) {
                     table.removeView(table.getChildAt(table.getChildCount() - 1));
@@ -275,9 +274,9 @@ public class WorkoutPlan_Activity extends AppCompatActivity {
                                             exercise,
                                             date);
                 if(isUpdate == true)
-                    Toast.makeText(WorkoutPlan_Activity.this,"Data Update",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChestPlan.this,"Data Update",Toast.LENGTH_LONG).show();
                 else
-                    Toast.makeText(WorkoutPlan_Activity.this,"Data not Updated",Toast.LENGTH_LONG).show();
+                    Toast.makeText(ChestPlan.this,"Data not Updated",Toast.LENGTH_LONG).show();
 
                 while (table.getChildCount() > 3) {
                     table.removeView(table.getChildAt(table.getChildCount() - 1));
