@@ -15,20 +15,41 @@
 
 
 
-        <LinearLayout
+        <RelativeLayout
             android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Chest"
                 android:textSize="40dp"
-                android:textColor="#000000"
-                />
+                android:textColor="#000000" />
 
-        </LinearLayout>
+            <Button
+                android:id="@+id/finishBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/button_bg_stroke"
+                android:layout_centerVertical="true "
+                android:text="Finish" />
+
+
+            <Button
+                android:id="@+id/cancelBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/button_bg_stroke"
+                android:layout_toLeftOf="@+id/finishBtn"
+                android:layout_marginRight="10dp"
+                android:layout_centerVertical="true "
+                android:text="Cancel" />
+
+
+        </RelativeLayout>
 
         <TableLayout
             android:id="@+id/table_layout_table"

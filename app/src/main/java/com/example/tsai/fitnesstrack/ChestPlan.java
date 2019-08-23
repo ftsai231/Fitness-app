@@ -1,6 +1,8 @@
 package com.example.tsai.fitnesstrack;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class ChestPlan extends AppCompatActivity {
 
@@ -36,6 +39,8 @@ public class ChestPlan extends AppCompatActivity {
     private Button addSetBtn6;
     private Button deleteSetBtn6;
     private Button updateSetBtn6;
+    private Button cancel;
+    private Button finish;
 
     private DatabaseHelper myDb;
     private Button deleteAllBtn;
@@ -74,8 +79,10 @@ public class ChestPlan extends AppCompatActivity {
     private final String exercise4 = "dips for chest";
     private final String exercise5 = "bench cable fly";
     private final String exercise6 = "incline dumbbell flies";
+    private String TABLENAME;
 
-    private SimpleDateFormat date;
+    SimpleDateFormat formatter;
+    Date date = new Date();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +90,12 @@ public class ChestPlan extends AppCompatActivity {
         setContentView(R.layout.chest_recommand);
 
         myDb = new DatabaseHelper(this);
-        SimpleDateFormat date = new SimpleDateFormat("dd-MMM-yyyy");
         context = getApplicationContext();
+        formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        date = new Date();
+        String d = date.toString().replaceAll("\\s", "").replaceAll(":", "").replace("+", "");
+        TABLENAME = "ChestWorkout" + d;
+
 
         editSet1 = (EditText) findViewById(R.id.set);
         editWeight1 = (EditText) findViewById(R.id.weight);
@@ -126,6 +137,9 @@ public class ChestPlan extends AppCompatActivity {
         deleteSetBtn6 = (Button) findViewById(R.id.delete6);
         updateSetBtn6 = (Button) findViewById(R.id.update6);
 
+        cancel = (Button) findViewById(R.id.cancelBtn);
+        finish = (Button) findViewById(R.id.finishBtn);
+
         tableLayout1 = (TableLayout)findViewById(R.id.table_layout_table);
         tableLayout2 = (TableLayout)findViewById(R.id.table_layout_table2);
         tableLayout3 = (TableLayout)findViewById(R.id.table_layout_table3);
@@ -162,13 +176,55 @@ public class ChestPlan extends AppCompatActivity {
         updateData(updateSetBtn5, exercise5, tableLayout5, editSet5, editWeight5, editReps5);
         updateData(updateSetBtn6, exercise6, tableLayout6, editSet6, editWeight6, editReps6);
 
-//        deleteAllData();
+        cancelWorkout();
+
     }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        myDb = new DatabaseHelper(this);
+
+    public void cancelWorkout(){
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final AlertDialog.Builder builder = new AlertDialog.Builder(ChestPlan.this);
+                builder.setTitle("Are you sure to cancel?");
+                builder.setMessage("Are you sure you want to cancel this workout? All the data will be lost!");
+
+                builder.setPositiveButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        myDb.deleteTable(TABLENAME);
+                        finish();
+                    }
+                });
+
+
+                builder.setNegativeButton("Resume", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                //Creates an AlertDialog with the arguments supplied to this builder.
+                AlertDialog dialog = builder.create();
+
+                dialog.show();
+
+
+
+
+            }
+        });
+    }
+
+    public void finishWorkout(){
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     public void addData(Button btn, final String exercise, final TableLayout table, final EditText editSet, final EditText editWeight, final EditText editReps){
@@ -237,17 +293,6 @@ public class ChestPlan extends AppCompatActivity {
                 }
                 viewDataTable(exercise, table);
 
-//                int count = table.getChildCount();
-//                for(int i=2;i<count;i++){
-//                    TableRow row = (TableRow) table.getChildAt(i);
-//
-//                    TextView t = (TextView) row.getChildAt(0);
-//                    if(t.toString().equals(editSet.getText().toString())){
-//                        table.removeViewAt(i);
-//                        break;
-//                    }
-//                }
-
             }
 
         });
@@ -257,7 +302,7 @@ public class ChestPlan extends AppCompatActivity {
         deleteAllBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myDb.deleteTable();
+                myDb.deleteTable(TABLENAME);
                 while (table.getChildCount() > 3) tableLayout1.removeView(tableLayout1.getChildAt(tableLayout1.getChildCount() - 1));
             }
         });
@@ -347,7 +392,6 @@ public class ChestPlan extends AppCompatActivity {
             table.addView(tableRow);
 
         }
-
     }
 
 }

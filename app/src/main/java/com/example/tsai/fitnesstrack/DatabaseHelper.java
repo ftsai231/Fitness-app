@@ -19,6 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String Col_3 = "REPS";
     public static final String Col_4 = "EXERCISE";
     public static final String Col_5 = "DATE";
+    public static SimpleDateFormat date;
 
 
     public DatabaseHelper(Context context) {
@@ -28,7 +29,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME +" (SETT INTEGER, WEIGHT TEXT , REPS TEXT, EXERCISE TEXT, DATE DATE);");
+        date = new SimpleDateFormat("dd-M-yyyy");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + date.toString() +" (SETT INTEGER, WEIGHT TEXT , REPS TEXT, EXERCISE TEXT, DATE DATE);");
     }
 
 
@@ -46,15 +48,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_NAME +" (SETT INTEGER, WEIGHT TEXT , REPS TEXT, EXERCISE TEXT, DATE DATE);");
     }
 
-    public void deleteTable(){
+    public void deleteTable(String tableName){
         SQLiteDatabase db = this.getWritableDatabase();
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
-        db.execSQL("CREATE TABLE " + TABLE_NAME +" (SETT INTEGER, WEIGHT TEXT , REPS TEXT, EXERCISE TEXT, DATE DATE);");
+        db.execSQL("DROP TABLE IF EXISTS "+ tableName);
+//        db.execSQL("CREATE TABLE " + TABLE_NAME +" (SETT INTEGER, WEIGHT TEXT , REPS TEXT, EXERCISE TEXT, DATE DATE);");
 
     }
 
 
-    public boolean insertData(String id, String weight, String reps, String exercise, SimpleDateFormat date) {
+    public boolean insertData(String id, String weight, String reps, String exercise, Date date) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Col_1, id);
@@ -77,7 +79,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return db.delete(TABLE_NAME, "SETT = ?" + " AND " + "EXERCISE = ?", new String[] {id, exercise});
     }
 
-    public boolean updateData(String set, String weight, String reps, String exercise, SimpleDateFormat date){
+    public boolean updateData(String set, String weight, String reps, String exercise, Date date){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Col_1, set);
